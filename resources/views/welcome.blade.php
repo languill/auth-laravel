@@ -12,9 +12,15 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>User management system</h1>
-                <p><a class="btn btn-info" href="/login">Login</a></p>
-                <p><a class="btn btn-warning"  href="/registration">Registration</a></p>
+                <h1>Social network Global Connection</h1>
+                @guest
+                    <p><a class="btn btn-info" href="{{ route('login') }}">Login</a></p>
+                    <p><a class="btn btn-warning"  href="{{ route('registration') }}">Registration</a></p>
+                @endguest
+
+                @auth
+                    <p><a class="btn btn-info"  href="{{ route('private') }}">User's Area</a></p>
+                @endauth
             </div>
         </div>
     </div>

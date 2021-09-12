@@ -1,10 +1,12 @@
 @extends('layout')
 
+@section('title', 'Set avatar')
+
 @section('content')
     <main id="js-page-content" role="main" class="page-content mt-3">
         <div class="subheader">
             <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-image'></i> Загрузить аватар
+                <i class='subheader-icon fal fa-image'></i> Upload avatar
             </h1>
 
         </div>
@@ -15,25 +17,25 @@
                     <div id="panel-1" class="panel">
                         <div class="panel-container">
                             <div class="panel-hdr">
-                                <h2>Текущий аватар</h2>
+                                <h2>Current avatar</h2>
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    @if($user->avatar)
-                                        <img src="/{{$user->avatar}}" class="img-responsive" width="200">
+                                    @if($user->avatar->avatar_title)
+                                        <img src="/{{$user->avatar->avatar_title}}" class="img-responsive" width="200">
                                     @else
                                         <img src="/uploads/avatar.png" class="img-responsive" width="200">
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label" for="example-fileinput">Выберите аватар</label>
-                                    <input name="avatar" type="file" id="example-fileinput" class="form-control-file">
+                                    <label class="form-label" for="example-fileinput">Choose an avatar</label>
+                                    <input name="avatar_title" type="file" id="example-fileinput" class="form-control-file">
                                 </div>
 
 
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btn-warning">Загрузить</button>
+                                    <button type="submit" class="btn btn-warning">Download</button>
                                 </div>
                             </div>
                         </div>

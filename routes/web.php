@@ -12,24 +12,20 @@
 */
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Gender;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', 'HomeController@index')->name('welcome');
 
-Route::get('/login', function() {
-    return view('login');
-})->name('login');
+Route::get('/login', 'HomeController@login_form')->name('login');
 
 Route::post('/login_form', 'HomeController@authenticate');
 
-Route::get('/registration', function() {
-    return view('registration');
-})->name('registration');
+Route::get('/registration', 'HomeController@registration_form')->name('registration');
 
-Route::post('/registration_form', 'HomeController@registration');
+Route::post('/registration_form', 'HomeController@registration')->name('registration_form');
 
-Route::get('/logout', 'HomeController@logout');
+Route::get('/logout', 'HomeController@logout')->name('logout');
 
 
 
@@ -58,7 +54,13 @@ Route::middleware('auth')->group(function() {
 
     Route::post('/avatar_form/{id}', 'AdminController@avatar_form')->name('avatar_form');
 
+    Route::get('/socials/{id}', 'AdminController@socials')->name('socials');
+
+    Route::post('/social_form/{id}', 'AdminController@social_form')->name('social_form');
+
     Route::get('/delete/{id}', 'AdminController@delete')->name('delete');
+
+    Route::post('/private', 'AdminController@search')->name('search');
 
 });
 

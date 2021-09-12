@@ -1,5 +1,7 @@
 @extends('layout')
 
+@section('title', 'Security')
+
 @section('content')
 <main id="js-page-content" role="main" class="page-content mt-3">
     <div class="subheader">

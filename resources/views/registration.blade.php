@@ -32,14 +32,14 @@
                     <div class="page-logo width-mobile-auto m-0 align-items-center justify-content-center p-0 bg-transparent bg-img-none shadow-0 height-9 border-0">
                         <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
                             <img src="/assets/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
-                            <span class="page-logo-text mr-1">Учебный проект</span>
+                            <span class="page-logo-text mr-1">Global connection</span>
                         </a>
                     </div>
                     <span class="text-white opacity-50 ml-auto mr-2 hidden-sm-down">
-                            Уже зарегистрированы?
+                            Already Registered?
                         </span>
-                    <a href="/login" class="btn-link text-white ml-auto ml-sm-0">
-                        Войти
+                    <a href="{{ route('login') }}" class="btn-link text-white ml-auto ml-sm-0">
+                        Login
                     </a>
                 </div>
             </div>
@@ -48,12 +48,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <h2 class="fs-xxl fw-500 mt-4 text-white text-center">
-                                Регистрация
+                                Registration
                                 <small class="h3 fw-300 mt-3 mb-5 text-white opacity-60 hidden-sm-down">
-                                    Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться.
+                                    We bring people from different countries together for friendship, cooperation and partnership.
                                     <br>
-                                    По своей сути рыбатекст является альтернативой традиционному lorem ipsum
-
+                                    A place for new acquaintances.
                                 </small>
                             </h2>
                         </div>
@@ -72,23 +71,43 @@
                                             {{ session('hasEmail') }}
                                         </div>
                                     @endif
-                                <form id="js-login" novalidate="" action="/registration_form" method="POST">
+                                <form id="js-login" novalidate="" action="{{ route('registration_form') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label class="form-label" for="emailverify">Email</label>
-                                        <input name="email" type="text" id="emailverify" class="form-control" placeholder="Эл. адрес">
-                                        <div class="invalid-feedback">Заполните поле.</div>
-                                        <div class="help-block">Эл. адрес будет вашим логином при авторизации</div>
+                                        <input name="email" type="text" id="emailverify" class="form-control" placeholder="your@email.com" value="{{old('email')}}">
+                                        <div class="help-block">Email the address will be your login for authorization </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="userpassword">Пароль <br></label>
+                                        <label class="form-label" for="userpassword">Password <br></label>
                                         <input name="password" type="password" id="userpassword" class="form-control" placeholder="">
-                                        <div class="invalid-feedback">Заполните поле.</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="name">Your name <br></label>
+                                        <input name="name" type="text" id="name" class="form-control" value="{{old('name')}}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="gender">Your gender <br></label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="gender" type="radio" id="gender" value="male">
+                                            <label class="form-check-label" for="gender">
+                                                Male
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="gender" type="radio" id="gender" value="female">
+                                            <label class="form-check-label" for="gender">
+                                                Female
+                                            </label>
+                                        </div>
                                     </div>
 
                                     <div class="row no-gutters">
                                         <div class="col-md-4 ml-auto text-right">
-                                            <button id="js-login-btn" type="submit" class="btn btn-block btn-danger btn-lg mt-3">Регистрация</button>
+                                            <button id="js-login-btn" type="submit" class="btn btn-block btn-danger btn-lg mt-3">Registration</button>
                                         </div>
                                     </div>
                                 </form>
@@ -102,23 +121,6 @@
 </div>
 
 <script src="/assets/js/vendors.bundle.js"></script>
-<script>
-    $("#js-login-btn").click(function(event)
-    {
 
-        // Fetch form to apply custom Bootstrap validation
-        var form = $("#js-login")
-
-        if (form[0].checkValidity() === false)
-        {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-
-        form.addClass('was-validated');
-        // Perform ajax submit here...
-    });
-
-</script>
 </body>
 </html>

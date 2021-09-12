@@ -2,44 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Http\Requests\RegisterUserRequest;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+
 
 
 class HomeController extends Controller
 {
-    public function registration(Request $request) {
-        $validateFields = $request->validate([
-            'email' => 'required | email',
-            'password' => 'required'
-        ]);
+    public function index() {
+        return view('welcome');
+    }
 
-        $oldUser = User::where('email', '=', Input::get('email'))->exists();
+    public function login_form() {
+        return view('login');
+    }
 
-        if($oldUser) {
-            return redirect('registration')->with('hasEmail', 'This email is already taken');
+    public function registration_form()
+    {
+        return view('registration');
+    }
+
+    public function registration(RegisterUserRequest $request, UserService $userService)
+    {
+        if($userService->checkUserEmail($request)) {
+            return redirect('registration')->with('hasEmail', 'This email is already taken.');
         }
 
-        User::addUser($validateFields);
+        $userService->registerUser($request);
+        return redirect()->route('login')->with('userAdded', 'Registration successful.');
 
-        return redirect()->route('login')->with('userAdded', 'Registration successful');
     }
 
 
     public function authenticate(Request $request)
     {
-
         if (Auth::attempt([
             'email' => $request->get('email'),
             'password' => $request->get('password')
         ], ($request->get('remember_me')=='on' ? true : false))) {
-            // Аутентификация успешна
             return redirect()->intended('private');
         }
 
-
+        return redirect('login')->with('loginError', 'E-mail or password do not match.');
     }
 
     public function logout()

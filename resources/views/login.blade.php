@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>
-        Войти
-    </title>
+    <title>Login</title>
     <meta name="description" content="Login">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
@@ -28,7 +26,7 @@
     <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
         <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
             <img src="/assets/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
-            <span class="page-logo-text mr-1">Учебный проект</span>
+            <span class="page-logo-text mr-1">Global connection</span>
             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
         </a>
     </div>
@@ -40,27 +38,33 @@
             </div>
         @endif
 
+		@if (session('loginError'))
+            <div class="alert alert-danger">
+                {{ session('loginError') }}
+            </div>
+        @endif
+
         <form action="login_form" method="POST">
             @csrf
             <div class="form-group">
-                <label class="form-label" for="username">Email</label>
-                <input name="email" type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
+                <label class="form-label" for="email">Email</label>
+                <input name="email" type="email" id="email" class="form-control" placeholder="your@email.com" value="">
             </div>
             <div class="form-group">
-                <label class="form-label" for="password">Пароль</label>
+                <label class="form-label" for="password">Password</label>
                 <input name="password" type="password" id="password" class="form-control" placeholder="" >
             </div>
             <div class="form-group text-left">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="rememberme">
-                    <label name="remember_me" class="custom-control-label" for="rememberme">Запомнить меня</label>
+                    <label name="remember_me" class="custom-control-label" for="rememberme">Remember me</label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-default float-right">Войти</button>
+            <button type="submit" class="btn btn-default float-right">Login</button>
         </form>
     </div>
     <div class="blankpage-footer text-center">
-        Нет аккаунта? <a href="page_register.html"><strong>Зарегистрироваться</strong>
+        Don't have an account?  <a href="{{ route('registration') }}"><strong>Register now</strong>
     </div>
 </div>
 <video poster="/assets/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
